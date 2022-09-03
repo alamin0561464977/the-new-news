@@ -1,3 +1,4 @@
+// ====================== lode News Category ==================== //
 const lodeNewsCategory = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/news/categories`)
     const data = await res.json();
@@ -7,6 +8,7 @@ const lodeNewsCategory = async () => {
 };
 lodeNewsCategory();
 
+// ====================== display News Category ==================== //
 const displayNewsCategory = async (category) => {
     category.forEach(category => {
         // console.log(category);
@@ -21,6 +23,8 @@ const displayNewsCategory = async (category) => {
     });
 
 };
+
+// ============================ lode News ========================== //
 const lodeNews = async (category_id) => {
     // console.log(category_id);
     const spinner = document.getElementById('spinner');
@@ -32,11 +36,13 @@ const lodeNews = async (category_id) => {
     spinner.classList.add('d-none')
 };
 lodeNews('08')
+
+// ========================== display News ======================== //
 const displayNews = (news) => {
     const newsContainer = document.getElementById('newsContainer');
     newsContainer.innerHTML = "";
     news.forEach(news => {
-        // console.log(news);
+        console.log(news);
         const { image_url, title, details, author, total_view, _id } = news;
         const { name, img, published_date } = author;
         const newsDiv = document.createElement('div');
@@ -73,12 +79,19 @@ const displayNews = (news) => {
         </div>
         `;
         newsContainer.appendChild(newsDiv);
-        const items = document.getElementById('items');
-        items.innerHTML`
-             <h3>$ items found for category</h3>
-        `;
     });
+    const child = newsContainer.childNodes;
+    const items = document.getElementById('items');
+    items.innerHTML = "";
+    const div = document.createElement('div');
+    div.classList.add('text-center')
+    div.innerHTML = `
+            <h3>${child.length} items found for category</h3>
+        `;
+    items.appendChild(div);
 };
+
+// ========================== lode News Detail ======================== //
 const lodeNewsDetail = (newsId) => {
     const spinner = document.getElementById('modalSpinner');
     spinner.classList.remove('d-none');
@@ -86,8 +99,10 @@ const lodeNewsDetail = (newsId) => {
     fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
         .then(res => res.json())
         .then(data => displayNewsDetail(data.data[0]))
-    spinner.classList(add('d-none'))
+    spinner.classList.add('d-none');
 };
+
+// ========================== display News Detail ======================== //
 const displayNewsDetail = (newsDetail) => {
     console.log(newsDetail);
     const { title, image_url, author, published_date, details, total_view } = newsDetail;

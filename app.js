@@ -23,7 +23,7 @@ const displayNewsCategory = async (category) => {
         const div = document.createElement('div');
         div.classList.add('col')
         div.innerHTML = `
-            <h6 class="" onclick="lodeNews('${category.category_id}')">${category_name}</h6>
+            <h6 onclick="lodeNews('${category.category_id}')">${category_name}</h6>
         `;
         categorySection.appendChild(div);
     });
@@ -57,6 +57,7 @@ const displayNews = (news) => {
     news.forEach(news => {
         // console.log(news);
         const { image_url, title, details, author, total_view, _id } = news;
+        console.log(total_view)
         const { name, img, published_date } = author;
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card', 'mb-3')
@@ -73,12 +74,12 @@ const displayNews = (news) => {
                         <div class="col-12 col-sm-12 col-md-5 col-lg-5 d-flex">
                             <img style="max-width: 50px; height: 50px ;" src="${img}" class="img-fluid rounded-circle" alt="...">
                             <div class="mx-2">
-                                <p class="mb-0">${name}</p>
-                                <p>${published_date}</p>
+                                <p class="mb-0">${name !== null ? name : 'NO found'}</p>
+                                <p>${published_date !== null ? published_date : 'NO found'}</p>
                             </div>
                         </div>
                         <div class="col-2">
-                            <p><img style="max-width: 20px; height: 30px ;" src="https://iconarchive.com/download/i83709/custom-icon-design/mono-general-4/eye.ico" class="img-fluid rounded-circle" alt="..."> ${total_view}</p>
+                            <p><img style="max-width: 20px; height: 30px ;" src="https://iconarchive.com/download/i83709/custom-icon-design/mono-general-4/eye.ico" class="img-fluid rounded-circle" alt="..."> ${total_view !== null ? total_view : 'NO found'}</p>
                         </div>
                         <div class="col-3">
                             <img style="max-width: 100%; height: 60px ;" src="https://static.vecteezy.com/system/resources/thumbnails/003/355/389/small/five-5-star-rank-sign-illustration-free-vector.jpg" class="img-fluid rounded-circle" alt="...">
@@ -99,7 +100,7 @@ const displayNews = (news) => {
     const div = document.createElement('div');
     div.classList.add('text-center')
     div.innerHTML = `
-            <h3>${child.length} items found for category</h3>
+            <h3>${child.length !== 0 ? child.length : 'NO'} items found for category</h3>
         `;
     items.appendChild(div);
 };
@@ -142,12 +143,12 @@ const displayNewsDetail = (newsDetail) => {
                         <div class="col-12 col-sm-12 col-md-5 col-lg-5 d-flex">
                             <img style="max-width: 50px; height: 50px ;" src="${img}" class="img-fluid rounded-circle" alt="...">
                             <div class="mx-2">
-                                <p class="mb-0">${name}</p>
-                                <p>${published_date}</p>
+                                <p class="mb-0">${name !== null ? name : 'NO found'}</p>
+                                <p>${published_date !== null ? published_date : 'NO found'}</p>
                             </div>
                         </div>
                         <div class="col-2">
-                            <p><img style="max-width: 20px; height: 30px ;" src="https://iconarchive.com/download/i83709/custom-icon-design/mono-general-4/eye.ico" class="img-fluid rounded-circle" alt="..."> ${total_view}</p>
+                            <p><img style="max-width: 20px; height: 30px ;" src="https://iconarchive.com/download/i83709/custom-icon-design/mono-general-4/eye.ico" class="img-fluid rounded-circle" alt="..."> ${total_view !== null ? total_view : 'NO found'}</p>
                         </div>
                         <div class="col-3">
                             <img style="max-width: 100%; height: 60px ;" src="https://static.vecteezy.com/system/resources/thumbnails/003/355/389/small/five-5-star-rank-sign-illustration-free-vector.jpg" class="img-fluid rounded-circle" alt="...">

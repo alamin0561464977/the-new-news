@@ -43,6 +43,9 @@
             </div>
         </nav>
         <div class="row g-4 container mx-auto my-2" id="categorySection"></div>
+        <div id="items">
+
+        </div>
     </header>
     <main class="container">
         <section id="newsContainer" style="max-width: 100%;">
@@ -55,6 +58,12 @@
             </button>
         </section>
         <section>
+            <section class="text-center">
+                <button id="modalSpinner" class="btn btn-primary mt-5 d-none" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
+            </section>
             <!-- Modal -->
             <div class="modal fade modal-dialog-scrollable" id="exampleModal" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">

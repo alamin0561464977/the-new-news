@@ -73,13 +73,20 @@ const displayNews = (news) => {
         </div>
         `;
         newsContainer.appendChild(newsDiv);
-    })
+        const items = document.getElementById('items');
+        items.innerHTML`
+             <h3>$ items found for category</h3>
+        `;
+    });
 };
 const lodeNewsDetail = (newsId) => {
+    const spinner = document.getElementById('modalSpinner');
+    spinner.classList.remove('d-none');
     console.log(newsId);
     fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
         .then(res => res.json())
         .then(data => displayNewsDetail(data.data[0]))
+    spinner.classList(add('d-none'))
 };
 const displayNewsDetail = (newsDetail) => {
     console.log(newsDetail);

@@ -23,21 +23,26 @@ const displayNewsCategory = async (category) => {
 };
 const lodeNews = async (category_id) => {
     // console.log(category_id);
+    const spinner = document.getElementById('spinner');
+    spinner.classList.remove('d-none')
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     const res = await fetch(url)
     const data = await res.json()
-    displayNews(data.data)
+    displayNews(data.data);
+    spinner.classList.add('d-none')
 };
+lodeNews('08')
 const displayNews = (news) => {
     const newsContainer = document.getElementById('newsContainer');
+    newsContainer.innerHTML = "";
     news.forEach(news => {
-        console.log(news);
-        const { image_url, title, details, author, total_view } = news;
+        // console.log(news);
+        const { image_url, title, details, author, total_view, _id } = news;
         const { name, img, published_date } = author;
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card', 'mb-3')
         newsDiv.innerHTML = `
-        <div class="row g-0">
+        <div onclick="lodeNewsDetail('${_id}')" class="row g-0">
             <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                 <img style="height: 100%;" src="${image_url}" class="img-fluid rounded-start" alt="...">
             </div>
@@ -69,6 +74,12 @@ const displayNews = (news) => {
         `;
         newsContainer.appendChild(newsDiv);
     })
+};
+const lodeNewsDetail = (newsId) => {
+    // console.log(newsId);
+    fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
 }
 
 

@@ -1,10 +1,16 @@
 // ====================== lode News Category ==================== //
 const lodeNewsCategory = async () => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/news/categories`)
-    const data = await res.json();
-    const category = data.data.news_category;
-    displayNewsCategory(category);
-    // console.log(data.data.news_category);
+    try {
+        const res = await fetch(`https://openapi.programming-hero.com/api/news/categories`)
+        const data = await res.json();
+        const category = data.data.news_category;
+        displayNewsCategory(category);
+        // console.log(data.data.news_category);
+    }
+    catch (err) {
+        // catches errors both in fetch and response.json
+        alert(err);
+    }
 };
 lodeNewsCategory();
 
@@ -27,13 +33,20 @@ const displayNewsCategory = async (category) => {
 // ============================ lode News ========================== //
 const lodeNews = async (category_id) => {
     // console.log(category_id);
-    const spinner = document.getElementById('spinner');
-    spinner.classList.remove('d-none')
-    const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
-    const res = await fetch(url)
-    const data = await res.json()
-    displayNews(data.data);
-    spinner.classList.add('d-none')
+    try {
+        const spinner = document.getElementById('spinner');
+        spinner.classList.remove('d-none')
+        const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
+        const res = await fetch(url)
+        const data = await res.json()
+        displayNews(data.data);
+        spinner.classList.add('d-none')
+    }
+    catch (err) {
+        // catches errors both in fetch and response.json
+        alert(err);
+    }
+
 };
 lodeNews('08')
 
@@ -94,12 +107,17 @@ const displayNews = (news) => {
 // ========================== lode News Detail ======================== //
 const lodeNewsDetail = (newsId) => {
     const spinner = document.getElementById('modalSpinner');
-    spinner.classList.remove('d-none');
-    console.log(newsId);
-    fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
-        .then(res => res.json())
-        .then(data => displayNewsDetail(data.data[0]))
-    spinner.classList.add('d-none');
+    try {
+        spinner.classList.remove('d-none');
+        console.log(newsId);
+        fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
+            .then(res => res.json())
+            .then(data => displayNewsDetail(data.data[0]))
+        spinner.classList.add('d-none');
+    }
+    catch (err) {
+        alert(err)
+    }
 };
 
 // ========================== display News Detail ======================== //

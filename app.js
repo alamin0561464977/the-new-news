@@ -52,12 +52,12 @@ lodeNews('08')
 
 // ========================== display News ======================== //
 const displayNews = (news) => {
+    const sortArray = news.sort((a, b) => b.total_view - a.total_view);
     const newsContainer = document.getElementById('newsContainer');
     newsContainer.innerHTML = "";
-    news.forEach(news => {
+    sortArray.forEach(news => {
         // console.log(news);
         const { image_url, title, details, author, total_view, _id } = news;
-        console.log(total_view)
         const { name, img, published_date } = author;
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card', 'mb-3')

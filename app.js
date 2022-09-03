@@ -42,7 +42,7 @@ const displayNews = (news) => {
     const newsContainer = document.getElementById('newsContainer');
     newsContainer.innerHTML = "";
     news.forEach(news => {
-        console.log(news);
+        // console.log(news);
         const { image_url, title, details, author, total_view, _id } = news;
         const { name, img, published_date } = author;
         const newsDiv = document.createElement('div');
